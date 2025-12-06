@@ -1,0 +1,43 @@
+{
+  "core_references": {
+    "LangSpec": "https://github.com/ergoplatform/sigmastate-interpreter/blob/develop/docs/LangSpec.md",
+    "ErgoScript_PDF": "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf",
+    "AdvancedErgoScript_Tutorial": "https://storage.googleapis.com/ergo-cms-media/docs/AdvancedErgoScriptTutorial.pdf",
+    "ErgoScript_By_Example": "https://github.com/ergoplatform/ergoscript-by-example",
+    "Whitepaper": "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf"
+  },
+  "agent_reference": {
+    "PR_2242": "https://github.com/ergoplatform/ergo/pull/2242/files",
+    "guidelines": [
+      "Agents build transactions based on script logic",
+      "Agents maintain invariants",
+      "Agents ensure safe eUTXO transitions"
+    ]
+  },
+  "eutxo_model": {
+    "box_definition": "Value + tokens + registers + script",
+    "registers": ["R4", "R5", "R6", "R7", "R8", "R9"],
+    "principles": [
+      "Deterministic transitions",
+      "Data Inputs for read-only state",
+      "State encoded via registers and tokens"
+    ]
+  },
+  "known_issues": [
+    "Unvalidated data inputs",
+    "Token loss",
+    "OR bypass",
+    "Missing signatures",
+    "Sigma edge cases",
+    "Missing commit-reveal",
+    "HEIGHT logic bugs",
+    "Cyclic hash dependencies"
+  ],
+  "secure_patterns": {
+    "CommitReveal": "Two-stage hashing",
+    "PerpetualToken": "Token preservation",
+    "MultiStage": "Script hash verification",
+    "Multisig": "sigmaProp conditions",
+    "Refunds": "Timeout-based recovery"
+  }
+}

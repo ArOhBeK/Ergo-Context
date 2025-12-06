@@ -1,0 +1,24 @@
+# Embedding Input for ErgoScript Context
+
+[core_references]
+LangSpec, ErgoScript_PDF, AdvancedErgoScript_Tutorial, ErgoScript_By_Example, Whitepaper.
+
+[agent_reference]
+PR_2242, agent guidelines, off-chain behavior, transaction composition.
+
+[eutxo_model]
+Box structure, registers R4-R9, state transitions, data inputs.
+
+[known_issues]
+Unvalidated data inputs, token loss, OR-branch bypass, missing signatures,
+sigma edge cases, missing commit-reveal, HEIGHT bugs, cyclic hashes, cost issues.
+
+[secure_patterns]
+CommitReveal, PerpetualToken, MultiStage_Workflow, Multisig, EmergencyRefund,
+StateContinuation, OracleAuth.
+
+[agent_behavior_rules]
+Design and audit checklists for ErgoScript contracts.
+
+[llm_usage_notes]
+High-level instructions for LLMs and agents using this context.

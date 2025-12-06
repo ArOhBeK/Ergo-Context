@@ -1,0 +1,33 @@
+(context
+  (core_references
+    (LangSpec "https://github.com/ergoplatform/sigmastate-interpreter/blob/develop/docs/LangSpec.md")
+    (ErgoScript_PDF "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf")
+    (Advanced_Tutorial "https://storage.googleapis.com/ergo-cms-media/docs/AdvancedErgoScriptTutorial.pdf")
+    (Examples "https://github.com/ergoplatform/ergoscript-by-example"))
+  
+  (agent
+    (PR_2242 "https://github.com/ergoplatform/ergo/pull/2242/files")
+    (rules
+      "Agents build transactions"
+      "Agents enforce invariants"
+      "Agents ensure safe transitions"))
+  
+  (eutxo
+    (principles "deterministic" "parallelizable" "local state")
+    (registers R4 R5 R6 R7 R8 R9))
+  
+  (known_issues
+    "token loss"
+    "OR-branch bypass"
+    "missing signature"
+    "front running"
+    "HEIGHT misuse"
+    "sigma edge cases"
+    "script hash cycles")
+  
+  (secure_patterns
+    (CommitReveal "two-stage commit reveal")
+    (PerpetualToken "preserve tokens")
+    (StateContinuation "preserve registers/tokens")
+    (Multisig "sigmaProp combinations"))
+)

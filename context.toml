@@ -1,0 +1,53 @@
+[core_references]
+LangSpec = "https://github.com/ergoplatform/sigmastate-interpreter/blob/develop/docs/LangSpec.md"
+ErgoScript_PDF = "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf"
+AdvancedErgoScript_Tutorial = "https://storage.googleapis.com/ergo-cms-media/docs/AdvancedErgoScriptTutorial.pdf"
+ErgoScript_By_Example = "https://github.com/ergoplatform/ergoscript-by-example"
+Whitepaper = "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf"
+
+[agent_reference]
+PR_2242 = "https://github.com/ergoplatform/ergo/pull/2242/files"
+usage = "Off-chain agents compose transactions, maintain invariants, and ensure safe transitions."
+
+[eutxo_model]
+definition = "Box = value + tokens + registers + script"
+registers = ["R4", "R5", "R6", "R7", "R8", "R9"]
+principles = [
+  "deterministic state transitions",
+  "data inputs for read-only state",
+  "state encoded in registers and tokens"
+]
+
+known_issues = [
+  "unvalidated data inputs",
+  "token loss / unpreserved tokens",
+  "OR-branch bypass",
+  "missing signatures",
+  "sigma edge cases",
+  "missing commit-reveal",
+  "HEIGHT bugs",
+  "cyclic hash dependencies",
+  "script cost limit issues"
+]
+
+[secure_patterns]
+CommitReveal = "two-stage commit / reveal using hashes"
+PerpetualToken = "preserve tokens via OUTPUTS and script hash"
+MultiStage_Workflow = "validate next-stage script via propositionBytes hash"
+Multisig = "sigmaProp(pkA && pkB) or atLeast(n, keys)"
+EmergencyRefund = "HEIGHT > timeout && owner key"
+StateContinuation = "preserve key registers/tokens in next box"
+OracleAuth = "require oracle NFT or known box id"
+
+[agent_behavior_rules]
+design = [
+  "consult LangSpec and eUTXO constraints",
+  "apply secure patterns",
+  "validate against known_issues"
+]
+audit = [
+  "check all spend paths and invariants",
+  "verify value and token conservation",
+  "ensure signature and auth correctness",
+  "verify HEIGHT usage"
+]

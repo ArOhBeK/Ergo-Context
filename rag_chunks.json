@@ -1,0 +1,78 @@
+[
+  {
+    "id": "core_references",
+    "title": "CORE_REFERENCES",
+    "tags": [
+      "refs",
+      "langspec",
+      "docs"
+    ],
+    "text": "LangSpec, ErgoScript_PDF, AdvancedErgoScript_Tutorial, ErgoScript_By_Example, Whitepaper. Use to resolve syntax, semantics, and canonical examples."
+  },
+  {
+    "id": "agent_reference",
+    "title": "AGENT_REFERENCE",
+    "tags": [
+      "agents",
+      "off-chain",
+      "PR_2242"
+    ],
+    "text": "How off-chain agents interact with on-chain scripts and the node. Use when reasoning about automation, bots, and protocol-keeping logic."
+  },
+  {
+    "id": "eutxo_model",
+    "title": "EUTXO_MODEL",
+    "tags": [
+      "model",
+      "state",
+      "boxes"
+    ],
+    "text": "Extended UTXO: box = value + tokens + registers + script. Registers R4\u2013R9 carry state; Data Inputs read-only state. Use when structuring contract state transitions."
+  },
+  {
+    "id": "known_issues",
+    "title": "KNOWN_ERGOSCRIPT_ISSUES",
+    "tags": [
+      "audit",
+      "issues",
+      "vulns"
+    ],
+    "text": "Known issues: unvalidated data inputs, token loss, OR-branch bypass, missing signatures, sigma edge cases, missing commit-reveal, HEIGHT bugs, cyclic hashes, cost-limit complexity. Use as an audit checklist."
+  },
+  {
+    "id": "secure_patterns",
+    "title": "SECURE_PATTERNS_INDEX",
+    "tags": [
+      "patterns",
+      "best_practices"
+    ],
+    "text": "CommitReveal, PerpetualToken, MultiStage_Workflow, Multisig, EmergencyRefund, StateContinuation, OracleAuth. Use as building blocks for secure contract design."
+  },
+  {
+    "id": "resource_paths",
+    "title": "RESOURCE_PATHS",
+    "tags": [
+      "index",
+      "paths"
+    ],
+    "text": "Maps conceptual tasks to concrete files: LangSpec.md, tutorials, examples, and audit guides."
+  },
+  {
+    "id": "agent_behavior",
+    "title": "AGENT_BEHAVIOR_RULES",
+    "tags": [
+      "agents",
+      "behavior"
+    ],
+    "text": "Rules for agents when designing vs auditing contracts: always cross-reference LangSpec, eUTXO model, secure patterns, and known issues."
+  },
+  {
+    "id": "llm_usage",
+    "title": "LLM_USAGE_NOTES",
+    "tags": [
+      "llm",
+      "meta"
+    ],
+    "text": "High-level instructions for LLMs: this file is the top-level index for ErgoScript development and auditing context."
+  }
+]
