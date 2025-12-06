@@ -1,7 +1,7 @@
 # ErgoScript Development Context Package
 
 This package is a unified reference set for ErgoScript smart contract development on the Ergo blockchain.  
-All files describe the same domain knowledge—extended UTXO (eUTXO) concepts, secure patterns, known issues, and best practices—but in different formats so you can use them with both humans and tools.
+All files describe the same domain knowledge—extended UTXO (eUTXO) concepts, secure patterns, known issues, and best practices—but in different formats so you can use them with both humans and tools, including LLMs and autonomous agents.
 
 ---
 
@@ -19,11 +19,16 @@ This is the main document you should read first. It includes:
 - Guidelines for safe state transitions
 - High-level rules for how contracts should be designed and audited
 
-**How to use it:**
+**How to use it (developers):**
 
 - Keep `context.md` in your ErgoScript repo under `/context` or `/docs`.
 - Read it when designing new contracts or reviewing existing ones.
 - Treat it as the “house style guide” for ErgoScript in your project.
+
+**How to use it (LLMs/agents):**
+
+- Load the entire file into a **system prompt** or “developer context” for an LLM-powered assistant that helps write or review ErgoScript.
+- Use it as the **base layer of domain knowledge**, and then add the user’s specific contract or question on top.
 
 ---
 
@@ -33,14 +38,14 @@ This is the main document you should read first. It includes:
 
 This file contains the same logical sections as `context.md`, but as structured JSON objects.
 
-**How to use it:**
+**How to use it (tools):**
 
 - Load it from scripts that assist in ErgoScript development.
 - Use it in Node.js, Python, Rust, or any environment that prefers structured JSON.
 - Build tools that can:
   - show known issues,
-  - inject design patterns into templates,
-  - or validate simple rules against your contracts.
+  - list secure patterns,
+  - or verify simple rules against your contracts.
 
 Example (Node.js):
 
@@ -50,6 +55,14 @@ const ctx = JSON.parse(fs.readFileSync("./context.json", "utf8"));
 console.log(ctx.known_issues);
 ```
 
+**How to use it (LLMs/agents):**
+
+- Let an agent read `context.json` at startup to build an internal map of:
+  - `known_issues` to check against contracts,
+  - `secure_patterns` to recommend during code generation,
+  - `eutxo_model` principles to validate state transitions.
+- Agents can call into this JSON instead of relying only on natural-language context.
+
 ---
 
 ## 3. context.yaml
@@ -58,7 +71,7 @@ console.log(ctx.known_issues);
 
 Same content as `context.json`, but in YAML. This is helpful for configuration-driven setups.
 
-**How to use it:**
+**How to use it (CI/CD & infra):**
 
 - Reference in CI/CD pipelines (e.g., GitHub Actions, GitLab CI) to:
   - enforce that contracts meet basic rules,
@@ -73,6 +86,13 @@ known_issues:
   - "token loss / unpreserved tokens"
 ```
 
+**How to use it (agents):**
+
+- Use `context.yaml` as the **config file** for an ErgoScript agent, for example:
+  - list which patterns to enforce,
+  - define which issues to warn or fail on,
+  - define severity levels per issue.
+
 ---
 
 ## 4. context.toml
@@ -81,7 +101,7 @@ known_issues:
 
 This file is aimed at Rust-based tooling and services that interact with Ergo or ErgoScript.
 
-**How to use it:**
+**How to use it (Rust tools):**
 
 - Load it in Rust CLIs, backend services, or analysis tools that help with contract generation or verification.
 - Use it to keep a consistent config across tools without manually duplicating settings.
@@ -102,6 +122,13 @@ let ctx: Context = toml::from_str(&data)?;
 println!("{:?}", ctx.known_issues);
 ```
 
+**How to use it (Rust-based agents):**
+
+- A Rust agent can load `context.toml` at startup to:
+  - access known issues,
+  - enforce secure patterns,
+  - and drive linting/audit logic over contract source or ErgoTree.
+
 ---
 
 ## 5. context.loop
@@ -115,6 +142,13 @@ A compact, tree-structured representation of the same information.
 - For custom parsers or tools that like S-expression input.
 - For symbolic or logic-based analysis (e.g., custom static analyzers).
 - For experiments where you treat the context as structured, navigable data.
+
+**How to use it (agents):**
+
+- Logic-based or symbolic agents can parse `context.loop` to reason over the structure of:
+  - patterns,
+  - issues,
+  - and eUTXO principles as a tree rather than raw text.
 
 ---
 
@@ -139,6 +173,11 @@ A flat list of important terms and phrases pulled from the context, such as:
 - Use as a quick reference for naming conventions and core concepts.
 - Drive tagging or filtering in developer tools.
 
+**How to use it (LLMs/agents):**
+
+- Use these as **boosted terms** or “must-know concepts” when designing prompts.
+- Use to build a **vector index** of related documents (e.g., LangSpec, tutorials) and map them to these keywords.
+
 ---
 
 ## 7. embeddings_input.txt
@@ -151,10 +190,13 @@ This file is structured as grouped text sections, formatted for bulk ingestion b
 - computes text embeddings,
 - does keyword or similarity analysis.
 
-**How to use it:**
+**How to use it (LLMs & RAG):**
 
-- Feed directly into a search/embedding pipeline.
-- Use it to build “search over contract guidelines” in your dev tools or dashboards.
+- Run `embeddings_input.txt` through your embedding model.
+- Store the resulting vectors in a vector database (or basic index).
+- At query time, retrieve the most relevant sections and feed them into the LLM as additional context alongside the user’s contract or question.
+
+This is the simplest “single-file” starting point for a Retrieval-Augmented Generation (RAG) pipeline around ErgoScript knowledge.
 
 ---
 
@@ -169,13 +211,31 @@ This file breaks the context into small sections (“chunks”), each with:
 - `tags` — labels for filtering
 - `text` — a short description of that topic
 
-**How to use it:**
+**How to use it (tools):**
 
 - Load these chunks into a search index or knowledge store.
 - When a tool needs advice (e.g., on token handling or known issues), look up the relevant chunk by ID or tags.
-- Use it as a routing table between contract topics and content.
 
-Even if you’re not building a full RAG (Retrieval-Augmented Generation) system, you can still treat this as a “section index” of the context.
+**How to use it (LLMs/agents, full RAG setup):**
+
+1. **Ingest:**  
+   - For each chunk in `rag_chunks.json`, embed the `text`.  
+   - Store `{id, title, tags, text, vector}` in your vector store.
+
+2. **Query:**  
+   - When the user asks a question (e.g. “Is this auction contract safe?”), embed the question.  
+   - Retrieve the top-k most similar chunks from the vector store (e.g. `eutxo_model`, `known_issues`, `secure_patterns`).
+
+3. **Compose prompt:**  
+   - Build a prompt like:  
+     - System: high-level instructions (e.g. “You are an ErgoScript contract auditor...”).  
+     - Context: include the retrieved `text` chunks from `rag_chunks.json`.  
+     - User: include the contract or question.
+
+4. **Answer:**  
+   - Let the LLM respond, grounded in those specific, retrieved chunks of context, instead of guessing.
+
+This is the **recommended way** to integrate this package with an LLM-powered ErgoScript assistant or contract-auditing agent.
 
 ---
 
@@ -191,6 +251,8 @@ A plain PDF rendering of the main context content.
 - Attach to documentation packages, audit reports, or specs.
 - Print or review offline.
 
+Agents don’t typically use this directly, but it’s useful for humans collaborating with them.
+
 ---
 
 ## 10. sphinx_docs/index.rst & sphinx_docs/context.rst
@@ -202,7 +264,7 @@ These are the starter files for building a Sphinx-powered documentation site for
 - `index.rst` — entry point / table of contents.
 - `context.rst` — overview page describing what the context covers.
 
-**How to use them:**
+**How to use them (docs):**
 
 1. Ensure Sphinx is installed:
    ```bash
@@ -213,6 +275,10 @@ These are the starter files for building a Sphinx-powered documentation site for
    sphinx-build -b html sphinx_docs/ build/
    ```
 3. Open `build/index.html` in your browser to see a browsable set of docs based on this package.
+
+**How to use them (LLMs):**
+
+- If you push these docs to a public site (e.g., ReadTheDocs), you can also mirror that content into your RAG store alongside `rag_chunks.json`, giving the LLM richer, linked context.
 
 ---
 
@@ -237,7 +303,11 @@ These are the starter files for building a Sphinx-powered documentation site for
    - continuing state across multiple boxes,
    - enforcing correct token and ERG flows.
 
-4. Document your contract decisions so others can review against this context.
+4. If you are using an LLM assistant:
+   - Load `context.md` (or relevant chunks from `rag_chunks.json`) into the system context.
+   - Provide your intended contract behavior and let the model suggest an implementation that aligns with these rules.
+
+---
 
 ### When auditing an existing contract
 
@@ -250,7 +320,12 @@ These are the starter files for building a Sphinx-powered documentation site for
    - Are all paths protected by proper signatures or proofs?
    - Does every state transition obey the eUTXO expectations described here?
 
-3. Use **`context.json`**, **`.yaml`**, or **`.toml`** if you are writing automated checks or static analysis tools to assist in the audit.
+3. If you are using an LLM as an audit assistant:
+   - Provide the contract text as user content.
+   - Load relevant `rag_chunks.json` entries (e.g. `known_issues`, `secure_patterns`, `eutxo_model`) as context.
+   - Ask the model explicitly: “List potential vulnerabilities according to the known issues and patterns provided above.”
+
+4. Use **`context.json`**, **`.yaml`**, or **`.toml`** if you are writing automated checks or static analysis tools to assist in the audit.
 
 ---
 
@@ -284,8 +359,9 @@ This keeps human-facing docs, configs, and machine-oriented assets organized but
 
 ## Goal of This Package
 
-By keeping all of these files together, your ErgoScript projects always have:
+By keeping all of these files together and wiring them into your ErgoScript tooling and LLM/agent stack, your projects always have:
 
 - A single source of truth for how contracts **should** be designed.
 - Multiple formats so that humans, scripts, tools, and services can all consume the same knowledge.
 - A consistent way to reason about security, correctness, and maintainability across every contract you write or review.
+- A ready-made backbone for any ErgoScript-aware LLM assistant or autonomous contract-auditing agent.
