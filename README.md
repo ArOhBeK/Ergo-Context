@@ -11,13 +11,15 @@ All files describe the same domain knowledge—extended UTXO (eUTXO) concepts, s
 
 This is the main document you should read first. It includes:
 
-- Links to core references (LangSpec, tutorials, examples, whitepaper)
+- Links + local/offline paths to core references (LangSpec, tutorials, examples, whitepaper) via `./local_files/`
 - Overview of the eUTXO model on Ergo
 - How boxes, registers (R4–R9), tokens, and scripts fit together
 - Secure contract patterns (Commit–Reveal, perpetual token boxes, multi-stage flows, etc.)
 - Known ErgoScript issues and common pitfalls
 - Guidelines for safe state transitions
 - High-level rules for how contracts should be designed and audited
+
+Core reference files are mirrored under `local_files/` so air-gapped or localized LLM setups can load the same source material without internet access. In `context.json`, `context.yaml`, and `context.toml`, use `core_references_local` for offline paths.
 
 **How to use it (developers):**
 
@@ -341,6 +343,12 @@ You can lay these files out in a repository like this:
   context.toml
   context.loop
   keyword_index.txt
+
+/local_files
+  LangSpec.md
+  ErgoScript.pdf
+  AdvancedErgoScriptTutorial.pdf
+  ergoscript-by-example-main/
 
 /docs
   context.pdf

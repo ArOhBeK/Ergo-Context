@@ -4,6 +4,12 @@
     (ErgoScript_PDF "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf")
     (Advanced_Tutorial "https://storage.googleapis.com/ergo-cms-media/docs/AdvancedErgoScriptTutorial.pdf")
     (Examples "https://github.com/ergoplatform/ergoscript-by-example"))
+
+  (core_references_local
+    (LangSpec "./local_files/LangSpec.md")
+    (ErgoScript_PDF "./local_files/ErgoScript.pdf")
+    (Advanced_Tutorial "./local_files/AdvancedErgoScriptTutorial.pdf")
+    (Examples "./local_files/ergoscript-by-example-main"))
   
   (agent
     (PR_2242 "https://github.com/ergoplatform/ergo/pull/2242/files")

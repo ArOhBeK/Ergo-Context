@@ -5,6 +5,13 @@ AdvancedErgoScript_Tutorial = "https://storage.googleapis.com/ergo-cms-media/doc
 ErgoScript_By_Example = "https://github.com/ergoplatform/ergoscript-by-example"
 Whitepaper = "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf"
 
+[core_references_local]
+LangSpec = "./local_files/LangSpec.md"
+ErgoScript_PDF = "./local_files/ErgoScript.pdf"
+AdvancedErgoScript_Tutorial = "./local_files/AdvancedErgoScriptTutorial.pdf"
+ErgoScript_By_Example = "./local_files/ergoscript-by-example-main"
+Whitepaper = "./local_files/ErgoScript.pdf"
+
 [agent_reference]
 PR_2242 = "https://github.com/ergoplatform/ergo/pull/2242/files"
 usage = "Off-chain agents compose transactions, maintain invariants, and ensure safe transitions."

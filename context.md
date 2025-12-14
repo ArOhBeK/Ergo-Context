@@ -6,10 +6,15 @@
 ## 1. CORE_REFERENCES
 {
   "LangSpec": "https://github.com/ergoplatform/sigmastate-interpreter/blob/develop/docs/LangSpec.md",
+  "LangSpec_local": "./local_files/LangSpec.md",
   "ErgoScript_PDF": "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf",
+  "ErgoScript_PDF_local": "./local_files/ErgoScript.pdf",
   "AdvancedErgoScript_Tutorial": "https://storage.googleapis.com/ergo-cms-media/docs/AdvancedErgoScriptTutorial.pdf",
+  "AdvancedErgoScript_Tutorial_local": "./local_files/AdvancedErgoScriptTutorial.pdf",
   "ErgoScript_By_Example": "https://github.com/ergoplatform/ergoscript-by-example",
-  "Whitepaper": "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf"
+  "ErgoScript_By_Example_local": "./local_files/ergoscript-by-example-main",
+  "Whitepaper": "https://storage.googleapis.com/ergo-cms-media/docs/ErgoScript.pdf",
+  "Whitepaper_local": "./local_files/ErgoScript.pdf"
 }
 --------------------------------------------------------------------------------
 
@@ -75,9 +80,13 @@
 ## 6. RESOURCE_PATHS
 {
   "Syntax_and_Semantics": "LangSpec.md",
+  "Syntax_and_Semantics_local": "./local_files/LangSpec.md",
   "eUTXO_Basics": "ErgoScript_PDF",
+  "eUTXO_Basics_local": "./local_files/ErgoScript.pdf",
   "Examples": "ergoscript-by-example",
+  "Examples_local": "./local_files/ergoscript-by-example-main",
   "Advanced_Patterns": "AdvancedErgoScriptTutorial.pdf",
+  "Advanced_Patterns_local": "./local_files/AdvancedErgoScriptTutorial.pdf",
   "Audit_Guide": "KNOWN_ERGOSCRIPT_ISSUES + SECURE_PATTERNS_INDEX"
 }
 --------------------------------------------------------------------------------
