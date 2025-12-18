@@ -22,3 +22,6 @@ Design and audit checklists for ErgoScript contracts.
 
 [llm_usage_notes]
 High-level instructions for LLMs and agents using this context.
+
+[audit_examples]
+Human-reviewed LLM audit examples; common failure modes and corrections (false positives/negatives, singleton NFT patterns, fee cancellation, Coll index Int requirements, optimization like && vs allOf).

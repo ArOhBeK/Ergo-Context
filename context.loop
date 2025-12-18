@@ -36,4 +36,23 @@
     (PerpetualToken "preserve tokens")
     (StateContinuation "preserve registers/tokens")
     (Multisig "sigmaProp combinations"))
+
+  (audit_examples
+    (folder "./audit_examples")
+    (files
+      (file
+        (title "Gluon W ErgoScript Contract AI Audit Review (Proton Docs PDF)")
+        (path "./audit_examples/Gluon W ErgoScript Contract AI Audit Review - Proton Docs.pdf")))
+    (purpose "Calibration examples for where an LLM audit can be correct, incorrect, or partially correct, and what kinds of details it commonly misses.")
+    (observed_llm_pitfalls_from_example
+      "Missing that a token id check exists when it is referenced indirectly (e.g., inside a tuple like oracleBoxPoolNFT)."
+      "Over-recommending extra identity checks (e.g., ergoTree bytes) when a singleton NFT already uniquely identifies the box in common patterns."
+      "Producing valid findings but missing contextual cancellation/invariants (e.g., _MinFee cancels out when included on both input and output sides; singleton token amount is known to be 1 for a referenced box)."
+      "Not accounting for type constraints in ErgoScript (e.g., Coll[] indexing requires Int; a Long->Int downcast may be unavoidable)."
+      "Flagging theoretical numeric truncation issues without considering fixed bounds/constants (e.g., BUCKETS = 14)."
+      "Missing micro-optimizations and best-practice tradeoffs (e.g., && can be smaller than allOf(); getVar is off-chain supplied and may be intentionally flexible for multiple UIs).")
+    (how_to_use
+      "Treat LLM audit findings as hypotheses; verify against LangSpec and the actual on-chain constraints."
+      "When a finding depends on off-chain transaction construction, ask whether a different backend could violate this while still satisfying the script."
+      "Cross-check your audit output against these examples and call out uncertainty."))
 )

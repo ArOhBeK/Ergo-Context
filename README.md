@@ -12,6 +12,7 @@ All files describe the same domain knowledge—extended UTXO (eUTXO) concepts, s
 This is the main document you should read first. It includes:
 
 - Links + local/offline paths to core references (LangSpec, tutorials, examples, whitepaper) via `./local_files/`
+- Audit examples where an LLM audit was reviewed by a human (used to calibrate common failure modes) in `./audit_examples/`
 - Overview of the eUTXO model on Ergo
 - How boxes, registers (R4–R9), tokens, and scripts fit together
 - Secure contract patterns (Commit–Reveal, perpetual token boxes, multi-stage flows, etc.)
@@ -20,6 +21,8 @@ This is the main document you should read first. It includes:
 - High-level rules for how contracts should be designed and audited
 
 Core reference files are mirrored under `local_files/` so air-gapped or localized LLM setups can load the same source material without internet access. In `context.json`, `context.yaml`, and `context.toml`, use `core_references_local` for offline paths.
+
+Audit review artifacts are stored under `audit_examples/` and are meant to be used as grounded examples for where LLM audits can be wrong or only partially correct.
 
 **How to use it (developers):**
 
@@ -349,6 +352,9 @@ You can lay these files out in a repository like this:
   ErgoScript.pdf
   AdvancedErgoScriptTutorial.pdf
   ergoscript-by-example-main/
+
+/audit_examples
+  Gluon W ErgoScript Contract AI Audit Review - Proton Docs.pdf
 
 /docs
   context.pdf

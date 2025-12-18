@@ -12,3 +12,10 @@ HEIGHT Locking
 Multisig Sigma Props
 Oracle Authentication
 State Transition Invariants
+Audit Examples
+LLM Audit Failure Modes
+Human Review Corrections
+Singleton NFT Design Pattern
+MinFee Cancellation
+Coll Index Int Requirement
+ErgoScript Optimization (&& vs allOf)

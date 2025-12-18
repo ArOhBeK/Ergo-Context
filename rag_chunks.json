@@ -74,5 +74,16 @@
       "meta"
     ],
     "text": "High-level instructions for LLMs: this file is the top-level index for ErgoScript development and auditing context."
+  },
+  {
+    "id": "audit_examples",
+    "title": "AUDIT_EXAMPLES",
+    "tags": [
+      "audit",
+      "llm",
+      "human_review",
+      "failure_modes"
+    ],
+    "text": "Real audit artifacts where LLM findings were reviewed by a human. Use to calibrate common failure modes and avoid false positives/negatives; see ./audit_examples/."
   }
 ]

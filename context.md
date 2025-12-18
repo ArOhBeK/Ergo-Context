@@ -87,6 +87,8 @@
   "Examples_local": "./local_files/ergoscript-by-example-main",
   "Advanced_Patterns": "AdvancedErgoScriptTutorial.pdf",
   "Advanced_Patterns_local": "./local_files/AdvancedErgoScriptTutorial.pdf",
+  "Audit_Examples": "./audit_examples",
+  "Audit_Examples_GluonW_AI_Audit_Review_PDF": "./audit_examples/Gluon W ErgoScript Contract AI Audit Review - Proton Docs.pdf",
   "Audit_Guide": "KNOWN_ERGOSCRIPT_ISSUES + SECURE_PATTERNS_INDEX"
 }
 --------------------------------------------------------------------------------
@@ -113,6 +115,32 @@
 ## 8. LLM_USAGE_NOTES
 {
   "Goal": "Provide safe, correct, secure ErgoScript development & auditing.",
-  "Instruction": "Use this file as the primary index. All contextual lookup should be routed through CORE_REFERENCES, EUTXO_MODEL, SECURE_PATTERNS, and KNOWN_ISSUES."
+  "Instruction": "Use this file as the primary index. All contextual lookup should be routed through CORE_REFERENCES, EUTXO_MODEL, SECURE_PATTERNS_INDEX, KNOWN_ERGOSCRIPT_ISSUES, and AUDIT_EXAMPLES."
+}
+--------------------------------------------------------------------------------
+
+## 9. AUDIT_EXAMPLES (LLM output reviewed by human)
+{
+  "Folder": "./audit_examples",
+  "Files": [
+    {
+      "Title": "Gluon W ErgoScript Contract AI Audit Review (Proton Docs PDF)",
+      "Path": "./audit_examples/Gluon W ErgoScript Contract AI Audit Review - Proton Docs.pdf"
+    }
+  ],
+  "Purpose": "Use these as calibration examples for where an LLM audit can be correct, incorrect, or partially correct, and what kinds of details it commonly misses.",
+  "Observed_LLM_Pitfalls_From_Example": [
+    "Missing that a token id check exists when it is referenced indirectly (e.g., inside a tuple like oracleBoxPoolNFT).",
+    "Over-recommending extra identity checks (e.g., ergoTree bytes) when a singleton NFT already uniquely identifies the box in common patterns.",
+    "Producing valid findings but missing contextual cancellation/invariants (e.g., _MinFee cancels out when included on both input and output sides; singleton token amount is known to be 1 for a referenced box).",
+    "Not accounting for type constraints in ErgoScript (e.g., Coll[] indexing requires Int; a Long->Int downcast may be unavoidable).",
+    "Flagging theoretical numeric truncation issues without considering fixed bounds/constants (e.g., BUCKETS = 14).",
+    "Missing micro-optimizations and best-practice tradeoffs (e.g., && can be smaller than allOf(); getVar is off-chain supplied and may be intentionally flexible for multiple UIs)."
+  ],
+  "How_To_Use": [
+    "Treat LLM audit findings as hypotheses; verify against LangSpec and the actual on-chain constraints.",
+    "When a finding depends on off-chain transaction construction, explicitly ask: can a different backend violate this and still satisfy the script?",
+    "When in doubt, cross-check your current audit output against these examples and call out uncertainty."
+  ]
 }
 --------------------------------------------------------------------------------
